@@ -1,8 +1,10 @@
 package com.ttps.swagger.controllers;
 
 import com.ttps.swagger.dtos.ExceptionResponse;
+import com.ttps.swagger.dtos.MenuDTO;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +18,7 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ApiResponse(responseCode = "400", description = "An exception was thrown during the execution", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, examples = @ExampleObject("{\"status\": \"400\",\"message\": \"Null pointer exception\"}")))
+    @ApiResponse(responseCode = "400", description = "An exception was thrown during the execution", content = @Content(schema = @Schema(implementation = ExceptionResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE, examples = @ExampleObject("{\"status\": \"400\",\"message\": \"Null pointer exception\"}")))
     public ResponseEntity<ExceptionResponse> handleException(Exception e) {
         return ResponseEntity.badRequest().body(new ExceptionResponse("400", e.getMessage()));
     }

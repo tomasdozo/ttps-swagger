@@ -5,6 +5,7 @@ import com.ttps.swagger.controllers.interfaces.MenuControllerInterface;
 import com.ttps.swagger.dtos.CreateMenuRequest;
 import com.ttps.swagger.dtos.UpdateMenuRequest;
 import com.ttps.swagger.dtos.MenuDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class MenuController implements MenuControllerInterface {
 
     @Override
     @DeleteMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMenu(@PathVariable String uuid) {
 
         //Here we would delete the Menu
