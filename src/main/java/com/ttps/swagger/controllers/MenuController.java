@@ -6,16 +6,18 @@ import com.ttps.swagger.dtos.CreateMenuRequest;
 import com.ttps.swagger.dtos.UpdateMenuRequest;
 import com.ttps.swagger.dtos.MenuDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/menus")
 public class MenuController implements MenuControllerInterface {
 
     @Override
-    public ResponseEntity<MenuDTO> createMenu(CreateMenuRequest Menu) {
-        MenuDTO MenuDTO = new MenuDTO(UUID.randomUUID().toString(), Menu.name(), Menu.lastName(), Menu.address());
+    @PostMapping
+    public ResponseEntity<MenuDTO> createMenu( @RequestBody CreateMenuRequest Menu) {
+        MenuDTO MenuDTO = new MenuDTO(UUID.randomUUID().toString(), Menu.plate(), Menu.dessert(), Menu.beverage());
 
         //Here we would persist the Menu
 
@@ -23,8 +25,9 @@ public class MenuController implements MenuControllerInterface {
     }
 
     @Override
+    @PutMapping
     public ResponseEntity<MenuDTO> updateMenu(UpdateMenuRequest Menu) {
-        MenuDTO MenuDTO = new MenuDTO(Menu.uuid(), Menu.name(), Menu.lastName(), Menu.address());
+        MenuDTO MenuDTO = new MenuDTO(Menu.uuid(), Menu.plate(), Menu.dessert(), Menu.beverage());
 
         //Here we would persist the Menu
 
@@ -32,7 +35,8 @@ public class MenuController implements MenuControllerInterface {
     }
 
     @Override
-    public void deleteMenu(String uuid) {
+    @DeleteMapping("/{uuid}")
+    public void deleteMenu(@PathVariable String uuid) {
 
         //Here we would delete the Menu
         

@@ -1,8 +1,19 @@
 package com.ttps.swagger.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public record CreateMenuRequest(
-        String name,
-        String lastName,
-        String address
+        @Size(min = 1, max = 255)
+        @NotBlank
+        String plate,
+
+        @Size(min = 1, max = 255)
+        @NotBlank
+        String dessert,
+
+        @Size(min = 1, max = 255)
+        @NotBlank
+        String beverage
 ) {
 }
